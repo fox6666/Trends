@@ -1,6 +1,6 @@
 # trends
 
->利用Node.js+express+MongoDB+md5+Vue.js+vue-resource+vue-router来完成发动态，本人刚开始学习，请大神们多多指教！！！
+>利用Node.js+express+MongoDB+md5+Vue.js+vue-resource+vue-router来完成发动态，本人刚开始学习，请大神们多多指教！！！可以得话，可以点个赞哦。。
 
 ## Build Setup
 
