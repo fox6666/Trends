@@ -1,0 +1,135 @@
+body{
+  line-height:1.4;
+  color:#333;
+  font-family:"微软雅黑",arial;
+  font-size: 12px;
+}
+input,textarea,select{
+  font-size:100%;
+  font-family:inherit;
+}
+input,button,textarea,select{
+  border:none;
+  outline:none;
+}
+body,h1,h2,h3,h4,h5,h6,p,ul,li,form,input,button,textarea{
+  margin:0;
+  padding:0;
+}
+ul,li{
+  list-style-type:none;
+}
+img{border:0;}
+.bd-none{border:0; outline:none;}
+a{text-decoration: none;color:#555;}
+
+/*字体加粗*/
+.fw-n{font-weight: normal;}
+
+/*单行文本省略*/
+.ell{text-overflow:ellipsis; white-space:nowrap; overflow:hidden;}
+
+/*手型*/
+.cp{cursor: pointer;}
+
+/*overflow*/
+.oh{overflow:hidden;}
+.oa{overflow:auto;}
+
+/*box-sizing*/
+.bs_bb{box-sizing: border-box;}
+
+/*position*/
+.pr{position:relative;}
+.pa{position:absolute;}
+
+/*文本水平居中*/
+.ta-c{text-align: center;}
+
+/*水平垂直居中*/
+.center{
+  left:50%;
+  top:50%;
+  -webkit-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+}
+
+/*清浮动*/
+.clear{*zoom:1;}
+.clear:after{display:block; content:''; clear:both;}
+
+/*设置浮动*/
+.fl{float:left;}
+.fr{float:right;}
+
+
+/*display*/
+.db{display:block;}
+.di{display:inline-block;}
+
+/*背景色*/
+.bc-0-2{background: rgba(0,0,0,.2);}
+.bc-0-3{background: rgba(0,0,0,.3);}
+.bc-0-4{background: rgba(0,0,0,.4);}
+.bc-0-6{background: rgba(0,0,0,.6);}
+.bc-0{background: 0;}
+
+/*高度*/
+.h-pct100{height:100%;}
+
+/*字体颜色*/
+.c-f{color:#fff;}
+.c-255-8{color:rgba(255,255,255,.8);}
+
+/*首页*/
+.index-wrap{}
+    .index-title{height: 60px;line-height: 60px;padding: 0 100px;font-size:16px;}
+        .index-title-a{margin-right: 50px;}
+        .index-title-active{background:pink;}
+        .on-line{position: relative;}
+        .head-picture{border-radius:50%;vertical-align: text-top;}
+        .on-line:hover .on-line-list{display: block;}
+            .on-line-list{width:100px;line-height:25px;position: absolute;left:0px;border:1px solid gray;display:none;}
+                .on-line-item{margin-bottom:1px;}
+                .on-line-item:last-child{margin:0;}
+    .publish{padding: 100px 100px 0 100px;text-align: center;}
+        .publish-textarea{width:500px;height:200px;margin:0 auto;border:1px solid #f0a;border-radius: 20px;padding:10px;}
+        .publish-btn{width:100px;height:30px;margin:10px 0;background:pink;border-radius: 3px;}
+    .index-content{padding: 100px 100px 0 100px;}
+        .index-content-list{width:33.333%;padding-right:20px;margin-bottom:20px;box-sizing:border-box;}
+            .index-content-list-div{padding-left:10px;}
+                .index-content-list-title{height:30px;line-height: 30px;font-size: 14px;}
+                .index-content-list-main{line-height: 16px;}
+                .index-content-list-date,.assist,.assistName{line-height: 16px;margin:10px 0 5px 0;}
+                    .assist-span{display:inline-block;width:30px;text-align: center;}
+                    .assist-span:last-child{width:18px;height:18px;line-height: 16px;border-radius: 50%;cursor:pointer;vertical-align: sub;}
+                    .assist-pic{background:url("../../../static/img/assist.png");background-size: cover;}
+                    .assist-no-pic{background:url("../../../static/img/no-assist.png");background-size: cover;}
+        .btn-wrap{text-align:center;margin-bottom:10px;}
+            .btn{width:20px;height:20px;line-height: 20px;display:inline-block;border:1px solid #eee;cursor:pointer;}
+            .btn-active{background:pink;}
+                .btn:nth-child(2){margin:0 10px;}
+/*登入与注册*/
+.register-wrap,.login-wrap{margin:100px;border:1px solid #000;padding:20px 40px;}
+    .register-title,.login-title{height:60px;line-height: 60px;text-align:center;}
+    form{text-align: center;}
+        .register-label,.login-label{width:60px;height:30px;line-height: 30px;display:inline-block;}
+        .login-input,.register-input{margin-top:10px;width:150px;height:30px;line-height: 30px;border:1px solid gray;border-radius:5px;
+          text-indent:10px;}
+        .register-btn,.login-btn{display:inline-block;width:200px;height:30px;line-height: 30px;margin-top:20px;border-radius: 10px;cursor:pointer;background: deepskyblue;}
+    .warning{height: 30px;line-height: 30px;text-align:center;color:#ff00aa;}
+    .popup{position:absolute;left:0;top:0;bottom:0;right:0;text-align: center;}
+/*修改个人资料*/
+.revise-data-wrap{margin:100px;border:1px solid #000;padding:20px 40px;}
+    .revise-data-title{height:60px;line-height: 60px;text-align:center;}
+        .revise-data-coutent-pic{width:200px;min-height:200px;}
+/*好友列表*/
+.my-firends{margin:100px;border:1px solid #000;padding:20px 40px;}
+    .add-firends-input{height:30px;line-height:30px;border:1px solid pink;}
+    .add-firends-btn{height:30px;line-height:30px;margin-left:10px;padding:0 10px;cursor:pointer;background:pink;color:#fff;}
+  .my-firends-list{width:100px;}
+    .my-firends-item{height:30px;line-height: 30px;border-bottom:1px solid pink;}
+      .my-firends-item-a{display:block;}
