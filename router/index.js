@@ -107,7 +107,8 @@ exports.publish = function(req,res){
       "assistNumber": 0,
       "assistName": []
     },
-    "comment": []
+    "comment": [],
+    "commentValue": "评论",
   },function(err,result){
     if(err){
       res.send({"message": -1});
@@ -311,25 +312,52 @@ exports.publishComment = function(req,res){
         let commentValue = fields.comment;
         let comment = [];
 
-        // db.find("trends_table",{"_id": ObjectID(_id)},function(err,result){
-        //     console.log(result);
-        //     if(result[0].comment){
-        //         comment = result[0].comment;
-        //     }else{
-        //         comment.push({
-        //             "comment_username": username,
-        //             "comment_content": [
-        //                 {
-        //                     "comment_username": username,
-        //                     "comment": commentValue
-        //                 }
-        //             ]
-        //         })
-        //         db.updateMany("trends_table",{"_id": ObjectID(_id)},{$set: {"comment": comment}},function(err,result){
-        //             console.log(result,329);
-        //         })
-        //     }
-        // })
+        db.find("trends_table",{"_id": ObjectID(_id)},function(err,result){
+            console.log(result);
+
+            if(result[0].comment.length == 0){
+                comment = result[0].comment;
+                comment.push({
+                    "comment_username": username,
+                    "comment_content": [
+                        {
+                            "comment_username": username,
+                            "comment": commentValue
+                        }
+                    ]
+                })
+            }else{
+                comment = result[0].comment;
+                let flag = false;
+                let myIndex = 0;
+                comment.forEach(function(val,index){
+                    if(val.comment_username == username){
+                        flag = true;
+                        myIndex = index;
+                    }
+                })
+                if(flag){
+                    comment[myIndex].comment_content.push({
+                        "comment_username": username,
+                        "comment": commentValue
+                    })
+                }else{
+                    comment.push({
+                        "comment_username": username,
+                        "comment_content": [
+                            {
+                                "comment_username": username,
+                                "comment": commentValue
+                            }
+                        ]
+                    })
+                }
+            }
+            db.updateMany("trends_table",{"_id": ObjectID(_id)},{$set: {"comment": comment}},function(err,result){
+                // console.log(result,329);
+                res.send("1");
+            })
+        })
 
 
     }) 

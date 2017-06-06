@@ -42,12 +42,16 @@
                             <p class="assistName"><a v-for="(val,index2) in item.assist.assistName" v-if="index > 10 ? false : true">{{val}}<span v-if="index2 == item.assist.assistName.length - 1 ? false : true">,</span></a>等{{item.assist.assistName.length}}人赞了</p>
                         </div>
                         <div class="comment-wrap">
-                            <textarea class="comment-textarea" v-model="comment"></textarea>
-                            <div class="clear publish-comment"><span class="fr" @click="publishComment(item._id)">发表评论</span></div>
+                            <textarea class="comment-textarea" :value="item.commentValue" @input="textarea($event)"></textarea>
+                            <div class="clear publish-comment"><span class="fr" @click="publishComment(item._id,item.username,index)">发表评论</span></div>
                             <ul class="comment-list">
-                                <li class="comment-item">
-                                    <span class="comment-item-span">XXX:</span>
-                                    <p class="comment-item-p">哈哈哈</p>
+                                <li class="comment-item" v-for="cItem in item.comment">
+                                    <ul>
+                                        <li v-for="cItem2 in cItem.comment_content">
+                                            <span class="comment-item-span">{{cItem.comment_username}}:</span>
+                                            <p class="comment-item-p">{{cItem2.comment}}</p>
+                                        </li>
+                                    </ul>
                                 </li>
                             </ul>
                         </div>    
@@ -222,16 +226,29 @@
                             _this.fn(++number,result);
                       },(error)=>{console.log(error)});
             },
-            publishComment(id){
+            textarea(event){
+                this.comment = event.target.value;
+            },
+            publishComment(id,itemUsername,index){
                 let username = this.username;
                 let comment = this.comment;
                 let _id = id;
+                let _this = this;
+
+                if(itemUsername == username){
+                    alert("不能评论自己的动态哦！");
+                    _this.allTrendsList[index].commentValue = "评论";
+                    console.log(_this.allTrendsList[index].commentValue)
+                    return;
+                }
+
                 this.$http.post("http://localhost:3000/publish-comment",{
                     "_id": _id,
                     "username": username,
                     "comment": comment
                 }).then((success) => {
                     console.log(success);
+                    _this.getAllTrends(1);
                 },(error) => {
                     console.log(error);
                 })
