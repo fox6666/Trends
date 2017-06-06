@@ -24,27 +24,39 @@
         <div class="publish">
             <textarea class="publish-textarea" v-model="textareaValue"></textarea>
             <br/>
-            <button class="publish-btn" @click="publish">发表</button>
+            <button class="publish-btn" @click="publish">发表说说</button>
         </div>
 
         <div class="index-content">
             <div class="clear">
                 <div class="index-content-list fl" v-for="(item,index) in allTrendsList">
                     <div class="index-content-list-div h-pct100" style="background:pink;">
-                        <p class="index-content-list-title">
-                            <img class="head-picture" :src="item.headPicture == '' ? '../../static/img/0.jpg' : '../../static/img/' + item.headPicture"  height="20" width="20" alt=""/>
-                            {{item.username}}
-                        </p>
-                        <div class="index-content-list-main">{{item.textareaValue}}</div>
-                        <p class="index-content-list-date">{{item.date}}</p>
-                        <p class="assist">赞<span class="assist-span">{{item.assist.assistNumber}}</span><span class="assist-span" :class="{'assist-pic': (item.assist.assistName.indexOf(username) != -1) ? true : false,'assist-no-pic': (item.assist.assistName.indexOf(username) == -1) ? true : false}" @click="assist(index)"></span></p>
-                        <p class="assistName"><a v-for="(val,index2) in item.assist.assistName" v-if="index > 10 ? false : true">{{val}}<span v-if="index2 == item.assist.assistName.length - 1 ? false : true">,</span></a>等{{item.assist.assistName.length}}人赞了</p>
+                        <div>
+                            <p class="index-content-list-title">
+                                <img class="head-picture" :src="item.headPicture == '' ? '../../static/img/0.jpg' : '../../static/img/' + item.headPicture"  height="20" width="20" alt=""/>
+                                {{item.username}}
+                            </p>
+                            <div class="index-content-list-main">{{item.textareaValue}}</div>
+                            <p class="index-content-list-date">{{item.date}}</p>
+                            <p class="assist clear">赞<span class="assist-span">{{item.assist.assistNumber}}</span><span class="assist-span" :class="{'assist-pic': (item.assist.assistName.indexOf(username) != -1) ? true : false,'assist-no-pic': (item.assist.assistName.indexOf(username) == -1) ? true : false}" @click="assist(index)"></span><span class="comment fr">评论</span></p>
+                            <p class="assistName"><a v-for="(val,index2) in item.assist.assistName" v-if="index > 10 ? false : true">{{val}}<span v-if="index2 == item.assist.assistName.length - 1 ? false : true">,</span></a>等{{item.assist.assistName.length}}人赞了</p>
+                        </div>
+                        <div class="comment-wrap">
+                            <textarea class="comment-textarea" v-model="comment"></textarea>
+                            <div class="clear publish-comment"><span class="fr" @click="publishComment(item._id)">发表评论</span></div>
+                            <ul class="comment-list">
+                                <li class="comment-item">
+                                    <span class="comment-item-span">XXX:</span>
+                                    <p class="comment-item-p">哈哈哈</p>
+                                </li>
+                            </ul>
+                        </div>    
                     </div>
                 </div>
             </div>
 
             <div class="btn-wrap">
-                <button v-for="item in pageCount" class="btn" @click="btn(item)" :class="{'btn-active': btnHtml == item ? true : false}">{{item}}</button>
+                <button v-for="item in pageCount" class="btn" @click="pageBtn(item)" :class="{'btn-active': btnHtml == item ? true : false}">{{item}}</button>
                 <button>每页{{pageNumber}}条</button>
                 <button>一共{{pageCount}}页</button>
             </div>
@@ -65,6 +77,7 @@
                 pageCount: 0,
                 pageNumber: 6,
                 btnHtml: 1,
+                comment: "评论",
             }
         },
         created(){
@@ -72,7 +85,7 @@
             if(localStorage.getItem("obj")){
                 // 获取当前用户的头像
                 this.username = JSON.parse(localStorage.getItem("obj")).username;
-                this.$http.get("http://localhost:3000/head-picture?username=" + _this.username)
+                this.$http.get("http://localhost:3000/head-picture?username=" + _this.username,)
                 .then((success)=>{
                     // console.log(success,72);
                     _this.srcUrl = success.body[0].headPicture;
@@ -172,7 +185,7 @@
                     })
                 }     
             },
-            btn(number){
+            pageBtn(number){
                 console.log(number);
                 this.btnHtml = number;
                 this.getAllTrends(number);
@@ -208,6 +221,20 @@
                             result[number].headPicture = success.data[0].headPicture ? success.data[0].headPicture : "";
                             _this.fn(++number,result);
                       },(error)=>{console.log(error)});
+            },
+            publishComment(id){
+                let username = this.username;
+                let comment = this.comment;
+                let _id = id;
+                this.$http.post("http://localhost:3000/publish-comment",{
+                    "_id": _id,
+                    "username": username,
+                    "comment": comment
+                }).then((success) => {
+                    console.log(success);
+                },(error) => {
+                    console.log(error);
+                })
             }
         }
     }

@@ -64,4 +64,7 @@ app
     
     //获取特定的用户  添加好友功能
     .get("/add-firends",router.addFirends)
+
+    // 发表评论
+    .post("/publish-comment",router.publishComment)
     .listen(3000);

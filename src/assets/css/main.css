@@ -108,6 +108,10 @@ a{text-decoration: none;color:#555;}
                     .assist-span:last-child{width:18px;height:18px;line-height: 16px;border-radius: 50%;cursor:pointer;vertical-align: sub;}
                     .assist-pic{background:url("../../../static/img/assist.png");background-size: cover;}
                     .assist-no-pic{background:url("../../../static/img/no-assist.png");background-size: cover;}
+                    .comment{margin-right:5px;cursor: pointer;}
+                        .comment-textarea{width: 95%;height:24px;border:1px solid #fff;background:0;padding:7px 0 0 7px;color:#fff;resize: vertical;}
+                        .publish-comment{margin: 5px;cursor: pointer;}
+                        .comment-list{margin: 5px;padding: 5px 0;border-top: 1px solid #fff;}
         .btn-wrap{text-align:center;margin-bottom:10px;}
             .btn{width:20px;height:20px;line-height: 20px;display:inline-block;border:1px solid #eee;cursor:pointer;}
             .btn-active{background:pink;}

@@ -106,7 +106,8 @@ exports.publish = function(req,res){
     "assist": {
       "assistNumber": 0,
       "assistName": []
-    }
+    },
+    "comment": []
   },function(err,result){
     if(err){
       res.send({"message": -1});
@@ -297,18 +298,44 @@ exports.addFirends = function(req,res){
             }
           }
         })
-        
-
-
-          
       }
     })
-  }
-    
+  }  
 }
 
+exports.publishComment = function(req,res){
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+        let _id = fields._id;
+        let username = fields.username;
+        let commentValue = fields.comment;
+        let comment = [];
+
+        // db.find("trends_table",{"_id": ObjectID(_id)},function(err,result){
+        //     console.log(result);
+        //     if(result[0].comment){
+        //         comment = result[0].comment;
+        //     }else{
+        //         comment.push({
+        //             "comment_username": username,
+        //             "comment_content": [
+        //                 {
+        //                     "comment_username": username,
+        //                     "comment": commentValue
+        //                 }
+        //             ]
+        //         })
+        //         db.updateMany("trends_table",{"_id": ObjectID(_id)},{$set: {"comment": comment}},function(err,result){
+        //             console.log(result,329);
+        //         })
+        //     }
+        // })
+
+
+    }) 
+}
 
 function md5(str){
-  var md5sum = crypto.createHash('md5');
-  return md5sum.update(str.toString()).digest("hex");
+    var md5sum = crypto.createHash('md5');
+    return md5sum.update(str.toString()).digest("hex");
 }
