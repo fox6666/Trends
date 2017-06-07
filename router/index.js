@@ -311,7 +311,7 @@ exports.publishComment = function(req,res){
         let username = fields.username;
         let commentValue = fields.comment;
         let comment = [];
-
+        var comment_id = parseInt(new Date().getTime() + Math.random() + 1000);
         db.find("trends_table",{"_id": ObjectID(_id)},function(err,result){
             console.log(result);
 
@@ -322,7 +322,8 @@ exports.publishComment = function(req,res){
                     "comment_content": [
                         {
                             "comment_username": username,
-                            "comment": commentValue
+                            "comment": commentValue,
+                            "comment_id": comment_id
                         }
                     ]
                 })
@@ -339,7 +340,8 @@ exports.publishComment = function(req,res){
                 if(flag){
                     comment[myIndex].comment_content.push({
                         "comment_username": username,
-                        "comment": commentValue
+                        "comment": commentValue,
+                        "comment_id": comment_id
                     })
                 }else{
                     comment.push({
@@ -347,7 +349,8 @@ exports.publishComment = function(req,res){
                         "comment_content": [
                             {
                                 "comment_username": username,
-                                "comment": commentValue
+                                "comment": commentValue,
+                                "comment_id": comment_id
                             }
                         ]
                     })
