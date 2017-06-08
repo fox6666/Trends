@@ -366,6 +366,22 @@ exports.publishComment = function(req,res){
     }) 
 }
 
+exports.reply = function(req,res){
+    var form = new formidable.IncomingForm();
+    form.parse(req, function (err, fields, files) {
+        let _id = fields._id;
+        let comment_username = fields.comment_username;
+        let replyValue = fields.replyValue;
+        let comment = [];
+        var comment_id = parseInt(new Date().getTime() + Math.random() + 1000);
+        db.find("trends_table",{"_id": ObjectID(_id)},function(err,result){
+          console.log(result[0]);
+        })
+
+
+    })
+}
+
 function md5(str){
     var md5sum = crypto.createHash('md5');
     return md5sum.update(str.toString()).digest("hex");

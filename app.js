@@ -67,4 +67,7 @@ app
 
     // 发表评论
     .post("/publish-comment",router.publishComment)
+
+    // 回复
+    .post("/reply",router.reply)
     .listen(3000);

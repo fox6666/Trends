@@ -48,8 +48,10 @@
                                 <li class="comment-item" v-for="cItem in item.comment">
                                     <ul>
                                         <li v-for="cItem2 in cItem.comment_content">
-                                            <span class="comment-item-span">{{cItem.comment_username}}:</span>
+                                            <span class="comment-item-span">{{cItem2.comment_username}}:</span>
                                             <p class="comment-item-p">{{cItem2.comment}}</p>
+                                            <span @click="reply(cItem2.comment_id,cItem.comment_username,item._id)">回复</span>
+                                            <textarea class="comment-textarea" v-show="myId == cItem2.comment_id ? true :false" :value="replyValue"></textarea>
                                         </li>
                                     </ul>
                                 </li>
@@ -82,6 +84,9 @@
                 pageNumber: 6,
                 btnHtml: 1,
                 comment: "评论",
+
+                myId: 0,
+                replyValue: ""
             }
         },
         created(){
@@ -193,6 +198,10 @@
                 console.log(number);
                 this.btnHtml = number;
                 this.getAllTrends(number);
+            },
+            reply(myId,comment_username,id){
+                this.myId = myId;
+                
             },
             getAllTrends(page){
                 var _this = this;
